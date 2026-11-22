@@ -1,0 +1,192 @@
+@font-face { font-family: "Ploni"; font-weight: 300; font-style: normal; font-display: swap; src: url("ploni-light.otf") format("opentype"); }
+@font-face { font-family: "Ploni"; font-weight: 400; font-style: normal; font-display: swap; src: url("ploni-regular.otf") format("opentype"); }
+@font-face { font-family: "Ploni"; font-weight: 500; font-style: normal; font-display: swap; src: url("ploni-medium.otf") format("opentype"); }
+body { margin: 0; background: #F3F5F7; }
+a { color: inherit; text-decoration: none; }
+a:hover { color: inherit; }
+
+#ams {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+}
+#ams *, #ams *::before, #ams *::after { box-sizing: border-box; }
+#ams img { display: block; }
+#ams :focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+#ams ::selection { background: #1E3A9B; color: #F3F5F7; }
+
+/* Text links: a hairline that draws from the reading edge. */
+#ams .lnk { position: relative; display: inline-flex; align-items: center; min-height: 44px; }
+#ams .lnk::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 11px; height: 1px;
+  background: currentColor; transform: scaleX(0); transform-origin: right center;
+  transition: transform 280ms var(--ease-out);
+}
+#ams .lnk:focus-visible::after { transform: scaleX(1); }
+
+/* The one button. Press feedback always; colour swap only where a pointer can hover. */
+#ams .btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 48px; padding: 0 28px; border: 1px solid #C9CDD2; color: #EEF0F2;
+  background-color: rgba(238, 240, 242, 0);
+  transition: transform 160ms var(--ease-out), background-color 200ms ease, color 200ms ease;
+}
+#ams .btn:active { transform: scale(0.97); }
+
+#ams .hov { transition: transform 900ms var(--ease-out); }
+#ams .h-tag { text-align: left; }
+@media (max-width: 640px) {
+  #ams .cta-top { display: none; }
+  #ams .h-tag { text-align: right; }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  #ams .lnk:hover::after { transform: scaleX(1); }
+  #ams .btn:hover { background-color: #EEF0F2; color: #1F1108; }
+  #ams .proj:hover .hov { transform: scale(1.035); }
+}
+
+/* ---------- Hero: the lights come up on a walnut wall ---------- */
+@keyframes amsWall { from { transform: scale(1.07); } to { transform: scale(1); } }
+@keyframes amsFadeOut { from { opacity: 1; } to { opacity: 0; } }
+@keyframes amsFadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes amsLogo {
+  from { clip-path: inset(0 0 100% 0); transform: translateY(-14px); }
+  to { clip-path: inset(0 0 0 0); transform: translateY(0); }
+}
+@keyframes amsRise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes amsSheen { from { transform: translateX(-110%); } to { transform: translateX(110%); } }
+
+#ams .h-wall { animation: amsWall 2600ms var(--ease-out) both; }
+/* The film sits over the still and only shows once it is actually playing; if it never plays, the still is the hero. */
+#ams .h-video { opacity: 0; transition: opacity 1400ms ease; }
+#ams .h-video[data-on] { opacity: 1; }
+#ams .h-dim { animation: amsFadeOut 2200ms var(--ease-in-out) 150ms both; }
+#ams .h-spot { animation: amsFadeIn 2000ms var(--ease-in-out) 500ms both; }
+#ams .h-logo { animation: amsLogo 1300ms var(--ease-in-out) 450ms both; }
+#ams .h-rise { animation: amsRise 800ms var(--ease-out) both; }
+
+/* A single pass of light across the steel, masked to the logo's own shape. */
+#ams .h-sheen { display: none; }
+@supports ((mask-image: url("logo-steel.png")) or (-webkit-mask-image: url("logo-steel.png"))) {
+  #ams .h-sheen {
+    display: block; position: absolute; inset: 0; overflow: hidden; pointer-events: none;
+    -webkit-mask-image: url("logo-steel.png"); mask-image: url("logo-steel.png");
+    -webkit-mask-size: 100% 100%; mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+  }
+  #ams .h-sheen-bar {
+    position: absolute; inset: 0;
+    background: linear-gradient(105deg, rgba(255, 255, 255, 0) 38%, rgba(255, 255, 255, 0.85) 50%, rgba(255, 255, 255, 0) 62%);
+    animation: amsSheen 1500ms var(--ease-in-out) 1700ms both;
+  }
+}
+
+
+/* ---------- Scroll reveals: armed by script, so content is never hidden without it ---------- */
+#ams[data-motion="on"] [data-reveal="up"] {
+  opacity: 0; transform: translateY(22px);
+  transition: opacity 700ms var(--ease-out), transform 900ms var(--ease-out);
+}
+#ams[data-motion="on"] [data-reveal="up"][data-in] { opacity: 1; transform: translateY(0); }
+
+#ams[data-motion="on"] [data-reveal="fade"] { opacity: 0; transition: opacity 900ms ease; }
+#ams[data-motion="on"] [data-reveal="fade"][data-in] { opacity: 1; }
+
+#ams[data-motion="on"] [data-reveal="line"] {
+  transform: scaleX(0); transform-origin: right center;
+  transition: transform 1000ms var(--ease-in-out);
+}
+#ams[data-motion="on"] [data-reveal="line"][data-in] { transform: scaleX(1); }
+
+#ams[data-motion="on"] [data-reveal="clip"] .clip {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 1100ms var(--ease-in-out);
+}
+#ams[data-motion="on"] [data-reveal="clip"] .zoom {
+  transform: scale(1.14);
+  transition: transform 1700ms var(--ease-out);
+}
+#ams[data-motion="on"] [data-reveal="clip"][data-in] .clip { clip-path: inset(0 0 0 0); }
+#ams[data-motion="on"] [data-reveal="clip"][data-in] .zoom { transform: scale(1); }
+
+/* Depth: the material behind each composition drifts a few percent as it crosses the screen. */
+@keyframes amsDrift { from { transform: translateY(-3.5%); } to { transform: translateY(3.5%); } }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* overflow: hidden would make each frame its own (non-scrolling) scroller and freeze the timeline */
+    #ams .clip, #ams .plx-box { overflow: clip !important; }
+    #ams .plx { animation: amsDrift linear both; animation-timeline: view(); animation-range: entry 0% exit 100%; }
+  }
+}
+
+/* Pointer light on the hero wall: position is written by script straight to transform. */
+#ams .h-light { opacity: 0; transition: opacity 700ms ease; will-change: transform; }
+#ams .h-light[data-on] { opacity: 1; }
+
+/* Leaving the hero: the room drifts and dims, the sign lifts away. Driven by scroll position, not by time. */
+@keyframes amsHeroBg { to { transform: translateY(9%); } }
+@keyframes amsHeroShade { to { opacity: 0.55; } }
+@keyframes amsHeroLogo { to { transform: translateY(-54px); opacity: 0; } }
+/* The statement lights up word by word as it crosses the screen. */
+@keyframes amsWord { from { opacity: 0.14; } to { opacity: 1; } }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    #ams .hero { view-timeline: --hero block; }
+    #ams .h-bg { animation: amsHeroBg linear both; animation-timeline: --hero; animation-range: exit 0% exit 100%; }
+    #ams .h-shade { animation: amsHeroShade linear both; animation-timeline: --hero; animation-range: exit 0% exit 90%; }
+    #ams .h-center { animation: amsHeroLogo linear both; animation-timeline: --hero; animation-range: exit 8% exit 78%; }
+    #ams .mf-text { view-timeline: --mf block; }
+    #ams .mf-text span { animation: amsWord linear both; animation-timeline: --mf; }
+    #ams .mf-text span:nth-child(1) { animation-range: cover 6.0% cover 16.0%; }
+    #ams .mf-text span:nth-child(2) { animation-range: cover 7.5% cover 17.4%; }
+    #ams .mf-text span:nth-child(3) { animation-range: cover 8.9% cover 18.9%; }
+    #ams .mf-text span:nth-child(4) { animation-range: cover 10.3% cover 20.4%; }
+    #ams .mf-text span:nth-child(5) { animation-range: cover 11.8% cover 21.8%; }
+    #ams .mf-text span:nth-child(6) { animation-range: cover 13.2% cover 23.2%; }
+    #ams .mf-text span:nth-child(7) { animation-range: cover 14.7% cover 24.7%; }
+    #ams .mf-text span:nth-child(8) { animation-range: cover 16.1% cover 26.1%; }
+    #ams .mf-text span:nth-child(9) { animation-range: cover 17.6% cover 27.6%; }
+    #ams .mf-text span:nth-child(10) { animation-range: cover 19.0% cover 29.0%; }
+    #ams .mf-text span:nth-child(11) { animation-range: cover 20.5% cover 30.5%; }
+    #ams .mf-text span:nth-child(12) { animation-range: cover 21.9% cover 31.9%; }
+    #ams .mf-text span:nth-child(13) { animation-range: cover 23.4% cover 33.4%; }
+    #ams .mf-text span:nth-child(14) { animation-range: cover 24.8% cover 34.8%; }
+    #ams .mf-text span:nth-child(15) { animation-range: cover 26.3% cover 36.3%; }
+    #ams .mf-text span:nth-child(16) { animation-range: cover 27.8% cover 37.8%; }
+    #ams .mf-text span:nth-child(17) { animation-range: cover 29.2% cover 39.2%; }
+    #ams .mf-text span:nth-child(18) { animation-range: cover 30.6% cover 40.6%; }
+    #ams .mf-text span:nth-child(19) { animation-range: cover 32.1% cover 42.1%; }
+    #ams .mf-text span:nth-child(20) { animation-range: cover 33.5% cover 43.5%; }
+    #ams .mf-text span:nth-child(21) { animation-range: cover 35.0% cover 45.0%; }
+    #ams .mf-text span:nth-child(22) { animation-range: cover 36.5% cover 46.5%; }
+  }
+}
+
+/* Section titles rise out of a mask. */
+#ams[data-motion="on"] [data-reveal="title"] > * {
+  clip-path: inset(0 0 100% 0); transform: translateY(0.3em);
+  transition: clip-path 1100ms var(--ease-in-out), transform 1300ms var(--ease-out);
+}
+#ams[data-motion="on"] [data-reveal="title"][data-in] > * { clip-path: inset(-0.1em -0.1em -0.25em -0.1em); transform: translateY(0); }
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+/* Reduced motion: keep the fades that explain what appeared, drop travel, wipes and loops. */
+@media (prefers-reduced-motion: reduce) {
+  #ams .h-wall, #ams .h-sheen-bar { animation: none; }
+  #ams .h-video, #ams .h-light { display: none; }
+  #ams[data-motion="on"] [data-reveal="title"] > * { clip-path: none; transform: none; opacity: 0; transition: opacity 500ms ease; }
+  #ams[data-motion="on"] [data-reveal="title"][data-in] > * { opacity: 1; }
+  #ams .h-sheen { display: none; }
+  #ams .h-logo, #ams .h-rise { animation-name: amsFadeIn; animation-duration: 600ms; }
+  #ams .hov, #ams .proj:hover .hov { transform: none; transition: none; }
+  #ams[data-motion="on"] [data-reveal="up"],
+  #ams[data-motion="on"] [data-reveal="line"],
+  #ams[data-motion="on"] [data-reveal="clip"] .zoom { transform: none; transition: opacity 500ms ease; }
+  #ams[data-motion="on"] [data-reveal="clip"] .clip { clip-path: none; opacity: 0; transition: opacity 500ms ease; }
+  #ams[data-motion="on"] [data-reveal="clip"][data-in] .clip { opacity: 1; }
+  #ams[data-motion="on"] [data-reveal="line"] { opacity: 0; }
+  #ams[data-motion="on"] [data-reveal="line"][data-in] { opacity: 1; }
+}
