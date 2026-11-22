@@ -22,27 +22,29 @@
  *
  *   Section
  *     HeroScene         .hero                         zoom-out, aurora, floating sign, sheen loop, scrubbed exit
+ *     PortraitScene     [data-portrait]               transparent film of the figure (AlphaVideo), scroll and cursor depth
  *
  * Everything lives inside gsap.matchMedia('(prefers-reduced-motion: no-preference)'):
  * a visitor who asks for reduced motion gets none of this layer, and the page falls back to its
  * plain CSS behaviour. If GSAP or Lenis failed to load, this file does nothing.
  */
-import { SmoothScroll } from './SmoothScroll.js?v=b228d25b';
-import { Preloader } from './Preloader.js?v=b228d25b';
-import { RevealText } from './RevealText.js?v=b228d25b';
-import { Reveal } from './Reveal.js?v=b228d25b';
-import { ScrubText } from './ScrubText.js?v=b228d25b';
-import { ParallaxWrapper } from './ParallaxWrapper.js?v=b228d25b';
-import { Float } from './Float.js?v=b228d25b';
-import { Marquee } from './Marquee.js?v=b228d25b';
-import { MagneticButton } from './MagneticButton.js?v=b228d25b';
-import { Tilt3D } from './Tilt3D.js?v=b228d25b';
-import { HorizontalTrack } from './HorizontalTrack.js?v=b228d25b';
-import { AuroraCanvas } from './AuroraCanvas.js?v=b228d25b';
-import { CenterActive } from './CenterActive.js?v=b228d25b';
-import { PressFeedback } from './PressFeedback.js?v=b228d25b';
-import { ScrollProgress } from './ScrollProgress.js?v=b228d25b';
-import { HeroScene } from './HeroScene.js?v=b228d25b';
+import { SmoothScroll } from './SmoothScroll.js?v=56d4fe87';
+import { Preloader } from './Preloader.js?v=56d4fe87';
+import { RevealText } from './RevealText.js?v=56d4fe87';
+import { Reveal } from './Reveal.js?v=56d4fe87';
+import { ScrubText } from './ScrubText.js?v=56d4fe87';
+import { ParallaxWrapper } from './ParallaxWrapper.js?v=56d4fe87';
+import { Float } from './Float.js?v=56d4fe87';
+import { Marquee } from './Marquee.js?v=56d4fe87';
+import { MagneticButton } from './MagneticButton.js?v=56d4fe87';
+import { Tilt3D } from './Tilt3D.js?v=56d4fe87';
+import { HorizontalTrack } from './HorizontalTrack.js?v=56d4fe87';
+import { AuroraCanvas } from './AuroraCanvas.js?v=56d4fe87';
+import { CenterActive } from './CenterActive.js?v=56d4fe87';
+import { PressFeedback } from './PressFeedback.js?v=56d4fe87';
+import { ScrollProgress } from './ScrollProgress.js?v=56d4fe87';
+import { HeroScene } from './HeroScene.js?v=56d4fe87';
+import { PortraitScene } from './PortraitScene.js?v=56d4fe87';
 
 const { gsap, ScrollTrigger, Lenis } = window;
 
@@ -82,6 +84,7 @@ if (gsap && ScrollTrigger && Lenis) {
       // with the extra scroll length it adds.
       ...all('[data-htrack]').map((el) => HorizontalTrack(el, { glares })),
       () => tilts.forEach(({ tilt }) => tilt.destroy()),
+      ...all('[data-portrait]').map((el) => PortraitScene(el)),
       ...all('[data-aurora]').map((el) => { el.classList.add('has-aurora'); return AuroraCanvas(el, { mode: 'surface' }); }),
       ...all('[data-marquee]').map((el) => Marquee(el)),
       ...all('[data-reveal-text]').map((el) => RevealText(el)),

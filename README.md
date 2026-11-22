@@ -27,6 +27,8 @@ Plain static site: `index.html`, `assets/site.css`, `assets/site.js` and images.
 | `AuroraCanvas.js` | WebGL light field that never stops moving and bends toward cursor or finger. | `data-aurora` on a section; the hero mounts its own. |
 | `Tilt3D.js` | 3D tilt with a light band: follows the cursor on desktop, the scroll on touch. | `data-tilt`. |
 | `HorizontalTrack.js` | Section pins; its cards travel sideways (`scrub: 1`), cover-flow on touch. | `data-htrack` on the row of cards. |
+| `PortraitScene.js` | About portrait: transparent film of the figure, scroll depth (`scrub: 1`), cursor depth, breathing light paused off screen. | `data-portrait` and `data-portrait-film="public/adi-about.mp4"` on the figure. |
+| `AlphaVideo.js` | Plays a film with a transparent background on every browser, iPhone included: the file holds the picture on top and its matte underneath, and a small shader joins them on a canvas. | Used by `PortraitScene`. |
 | `MagneticButton.js` | Button and label lean toward the cursor (mouse only). | `data-magnetic`. |
 | `CenterActive.js` | Touch replacement for hover: active while in mid-screen. | `data-center-active`. |
 | `PressFeedback.js` | `scale(0.95)` on touch/click, springs back. | Every `<a>`, `<button>` and `data-press`. |
@@ -38,3 +40,10 @@ The whole layer runs only under `prefers-reduced-motion: no-preference`, and doe
 ## Before committing
 
 Run `python3 scripts/stamp-version.py`. It puts a content hash (`?v=…`) on the site's own CSS and JS URLs, so browsers never mix a new page with an old cached script.
+
+## The About film
+
+`public/adi-about.mp4` is a "stacked alpha" film: an ordinary H.264 file, twice as tall as the picture, with the cut-out figure on top and its matte below. `assets/adi-about.webp` is its first frame as a transparent still (shown before the film starts, with reduced motion, or if the film cannot play) and `assets/adi-about-rim.webp` is the soft light behind her.
+
+All three come from one green-screen master: `python3 scripts/key_portrait.py master.mp4 outdir` (needs `ffmpeg`, `opencv-python`, `numpy`).
+

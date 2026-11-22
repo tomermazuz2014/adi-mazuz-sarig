@@ -15,8 +15,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..600;1,6..96,400..600&amp;display=swap">
 <link rel="preload" as="image" href="assets/hero.jpg">
-<link rel="stylesheet" href="assets/site.css?v=b228d25b">
-<link rel="stylesheet" href="components/motion/motion.css?v=b228d25b">
+<link rel="stylesheet" href="assets/site.css?v=56d4fe87">
+<link rel="stylesheet" href="components/motion/motion.css?v=56d4fe87">
 <!-- Closes the opening curtain before the first paint. If the motion layer never arrives, it lets go by itself. -->
 <script>(function(){var d=document.documentElement;if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;d.classList.add('is-loading');setTimeout(function(){d.classList.remove('is-loading')},4500);})();</script>
 </head>
@@ -102,19 +102,31 @@
           </div>
         </div>
       </div>
-      <figure data-reveal="clip" style="margin: 0">
-        <div class="clip" style="position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: #A9ADB2">
+      <figure class="adi" data-reveal="clip" data-portrait data-portrait-film="public/adi-about.mp4" style="margin: 0; position: relative; aspect-ratio: 4 / 5">
+        <div class="clip" style="position: absolute; inset: 0; overflow: hidden; background: #24130A">
           <div class="zoom" style="position: absolute; inset: 0">
-            <img class="plx" data-parallax="10" src="assets/stone.jpg" alt="" aria-hidden="true" style="position: absolute; left: 0; top: -12%; width: 100%; height: 124%; object-fit: cover">
-            <div style="position: absolute; top: 0; bottom: 0; left: 0; width: 34%; overflow: hidden">
-              <img src="assets/walnut.jpg" alt="" aria-hidden="true" style="width: 100%; height: 100%; object-fit: cover">
-            </div>
-            <div style="position: absolute; top: 0; bottom: 0; left: 34%; width: 6px; overflow: hidden">
+            <img class="plx" data-parallax="10" src="assets/walnut.jpg" alt="" aria-hidden="true" style="position: absolute; left: -3%; top: -12%; width: 106%; height: 124%; object-fit: cover">
+            <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(23, 24, 26, 0.18), rgba(23, 24, 26, 0.6))"></div>
+            <div style="position: absolute; top: 0; bottom: 0; right: 11%; width: 5px; overflow: hidden">
               <img src="assets/steel.jpg" alt="" aria-hidden="true" style="width: 100%; height: 100%; object-fit: cover">
             </div>
-            <div data-float="14" data-parallax="-16" style="position: absolute; right: 14%; top: 12%; width: 30%; aspect-ratio: 3 / 4; background: #1E3A9B"></div>
           </div>
-          <span style="position: absolute; right: 0; bottom: 0; padding: 10px 16px; background: #17181A; color: #F3F5F7; font-size: 13px; font-weight: 400">[דיוקן של עדי / צילום מהסטודיו]</span>
+        </div>
+        <div class="adi-glow" aria-hidden="true">
+          <div class="adi-glow-in">
+            <span class="adi-halo adi-halo-a"></span>
+            <span class="adi-halo adi-halo-b"></span>
+          </div>
+        </div>
+        <div class="adi-cut">
+          <div class="adi-rise">
+            <div class="adi-depth">
+              <div class="adi-fig">
+                <img class="adi-rim" src="assets/adi-about-rim.webp" alt="" aria-hidden="true">
+                <img class="adi-still" src="assets/adi-about.webp" alt="עדי מזוז שריג" width="816" height="1088" decoding="async">
+              </div>
+            </div>
+          </div>
         </div>
       </figure>
     </div>
@@ -380,11 +392,11 @@
 </footer>
 
 </div>
-<script src="assets/site.js?v=b228d25b"></script>
+<script src="assets/site.js?v=56d4fe87"></script>
 <!-- Motion layer: GSAP + ScrollTrigger + Lenis (vendored), then components/motion -->
 <script defer src="assets/vendor/gsap.min.js"></script>
 <script defer src="assets/vendor/ScrollTrigger.min.js"></script>
 <script defer src="assets/vendor/lenis.min.js"></script>
-<script type="module" src="components/motion/index.js?v=b228d25b"></script>
+<script type="module" src="components/motion/index.js?v=56d4fe87"></script>
 </body>
 </html>

@@ -111,6 +111,56 @@ a:hover { color: inherit; }
 #ams[data-motion="on"] [data-reveal="clip"][data-in] .clip { clip-path: inset(0 0 0 0); }
 #ams[data-motion="on"] [data-reveal="clip"][data-in] .zoom { transform: scale(1); }
 
+/* ---------- About: the portrait ---------- */
+/* A cut-out figure standing in front of a walnut panel. Her head rises above the panel's top edge;
+   the sides and the foot are cut by the frame. Layers, back to front: panel, light, figure. */
+/* The light may rise above the panel with her, but never past its sides: nothing here widens the page. */
+#ams .adi { overflow-x: clip; overflow-y: visible; }
+#ams .adi-glow { position: absolute; inset: -16% 0 0 0; z-index: 1; pointer-events: none; }
+@supports not (overflow-x: clip) { #ams .adi-glow { inset: 0; overflow: hidden; } }
+/* Stacked under the text (narrow screens), she needs headroom so her hair does not reach the lines above. */
+@media (max-width: 1040px) { #ams .adi { margin-top: 13%; } }
+#ams .adi-glow-in { position: absolute; inset: 0; }
+#ams .adi-halo { position: absolute; border-radius: 50%; will-change: transform, opacity; }
+#ams .adi-halo-a {
+  left: 11%; top: 4%; width: 78%; aspect-ratio: 1;
+  background: radial-gradient(closest-side, rgba(228, 236, 255, 0.92) 0%, rgba(140, 166, 255, 0.55) 36%, rgba(30, 58, 155, 0.26) 62%, rgba(30, 58, 155, 0) 100%);
+}
+#ams .adi-halo-b {
+  left: 8%; top: 40%; width: 84%; aspect-ratio: 5 / 4;
+  background: radial-gradient(closest-side, rgba(201, 205, 210, 0.5) 0%, rgba(201, 205, 210, 0.2) 48%, rgba(201, 205, 210, 0) 100%);
+}
+#ams .adi-cut { position: absolute; inset: 0; z-index: 2; clip-path: inset(-45% 0 0 0); pointer-events: none; }
+#ams .adi-rise, #ams .adi-depth { position: absolute; inset: 0; }
+#ams .adi-rise { transform-origin: 50% 100%; }
+/* 3:4 figure, 116% of the frame's height: 8% hangs below the foot (spare for the scroll travel),
+   8% stands above the panel. */
+#ams .adi-fig { position: absolute; left: -4.375%; width: 108.75%; bottom: -8%; aspect-ratio: 3 / 4; transform-origin: 50% 100%; will-change: transform; }
+#ams .adi-still, #ams .adi-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+/* The rim light is a picture of her outline, blurred; it is wider than the figure so the glow can spread. */
+#ams .adi-rim { position: absolute; left: -25%; top: -18.75%; width: 150%; height: auto; display: block; transform-origin: 50% 40%; will-change: transform, opacity; }
+
+@keyframes amsRim { from { opacity: 0.45; transform: scale(1); } to { opacity: 1; transform: scale(1.03); } }
+@keyframes amsHaloA { from { opacity: 0.62; transform: scale(0.9); } to { opacity: 1; transform: scale(1.12); } }
+@keyframes amsHaloB { from { opacity: 0.55; transform: translate3d(-5%, 2%, 0) scale(0.96); } to { opacity: 0.95; transform: translate3d(5%, -3%, 0) scale(1.08); } }
+@media (prefers-reduced-motion: no-preference) {
+  /* The light breathes for as long as she is on screen: transform and opacity only, off the main thread. */
+  #ams .adi-rim { animation: amsRim 3400ms ease-in-out infinite alternate; }
+  #ams .adi-halo-a { animation: amsHaloA 4600ms ease-in-out infinite alternate; }
+  #ams .adi-halo-b { animation: amsHaloB 6200ms ease-in-out infinite alternate; }
+}
+/* Arrival: the panel wipes open (the .clip rule above), then she rises into it and the light comes up. */
+#ams[data-motion="on"] [data-reveal="clip"] .adi-rise {
+  opacity: 0; transform: translateY(16%) scale(1.1);
+  transition: opacity 900ms var(--ease-out) 380ms, transform 1600ms var(--ease-out) 380ms;
+}
+#ams[data-motion="on"] [data-reveal="clip"][data-in] .adi-rise { opacity: 1; transform: none; }
+#ams[data-motion="on"] [data-reveal="clip"] .adi-glow {
+  opacity: 0; transform: scale(0.6);
+  transition: opacity 1400ms ease 700ms, transform 2000ms var(--ease-out) 700ms;
+}
+#ams[data-motion="on"] [data-reveal="clip"][data-in] .adi-glow { opacity: 1; transform: none; }
+
 /* Depth: the material behind each composition drifts a few percent as it crosses the screen. */
 @keyframes amsDrift { from { transform: translateY(-3.5%); } to { transform: translateY(3.5%); } }
 @supports (animation-timeline: view()) {
@@ -189,6 +239,8 @@ a:hover { color: inherit; }
   #ams[data-motion="on"] [data-reveal="clip"] .zoom { transform: none; transition: opacity 500ms ease; }
   #ams[data-motion="on"] [data-reveal="clip"] .clip { clip-path: none; opacity: 0; transition: opacity 500ms ease; }
   #ams[data-motion="on"] [data-reveal="clip"][data-in] .clip { opacity: 1; }
+  #ams[data-motion="on"] [data-reveal="clip"] .adi-rise,
+  #ams[data-motion="on"] [data-reveal="clip"] .adi-glow { transform: none; transition: opacity 500ms ease; }
   #ams[data-motion="on"] [data-reveal="line"] { opacity: 0; }
   #ams[data-motion="on"] [data-reveal="line"][data-in] { opacity: 1; }
 }
