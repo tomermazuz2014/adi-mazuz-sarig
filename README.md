@@ -30,3 +30,7 @@ Plain static site: `index.html`, `assets/site.css`, `assets/site.js` and images.
 | `motion.css` | Styles for the above, and the rules that switch off the CSS versions of the same effects while this layer is on. | — |
 
 The whole layer runs only under `prefers-reduced-motion: no-preference`, and does nothing if the libraries fail to load; the page then falls back to the CSS behaviour in `assets/site.css` and `assets/site.js`.
+
+## Before committing
+
+Run `python3 scripts/stamp-version.py`. It puts a content hash (`?v=…`) on the site's own CSS and JS URLs, so browsers never mix a new page with an old cached script.
