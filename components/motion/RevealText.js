@@ -3,7 +3,10 @@
  *
  * Usage:   <h2 data-reveal-text>Planning. Material. Detail.</h2>
  * Options: data-reveal-stagger="0.08"  seconds between lines (0.04–0.08 keeps it one gesture)
- *          data-reveal-delay="1.5"     seconds to wait once triggered (for text that is on screen at load)
+ *          data-reveal-delay="1.5"     seconds to wait before the lines move
+ *          data-reveal-now              play on load instead of on scroll — for text in the first screen,
+ *                                       which may sit below the trigger line on a short window and would
+ *                                       otherwise wait, hidden, for a scroll that takes it away
  *          data-reveal-start="top 85%" ScrollTrigger start
  *
  * How it works
@@ -26,6 +29,7 @@ export function RevealText(el, options = {}) {
   const start = options.start ?? el.dataset.revealStart ?? 'top 85%';
   const duration = options.duration ?? 1.15;
   const delay = Number(options.delay ?? el.dataset.revealDelay ?? 0);
+  const immediate = options.immediate ?? el.hasAttribute('data-reveal-now');
 
   const originalHTML = el.innerHTML;
   const originalLabel = el.getAttribute('aria-label');
@@ -89,7 +93,7 @@ export function RevealText(el, options = {}) {
       delay,
       ease: 'expo.out',
       stagger,
-      scrollTrigger: { trigger: el, start, once: true },
+      ...(immediate ? {} : { scrollTrigger: { trigger: el, start, once: true } }),
       onComplete() { done = true; restore(); },
     });
   };
