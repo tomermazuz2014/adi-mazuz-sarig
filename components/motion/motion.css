@@ -14,15 +14,49 @@ html.lenis { scroll-behavior: auto !important; }
 .rt-line { display: block; overflow: hidden; padding-bottom: 0.14em; margin-bottom: -0.14em; }
 .rt-line-in { display: block; will-change: transform; }
 
-/* ---------- MagneticButton ---------- */
+/* ---------- MagneticButton / PressFeedback ---------- */
 .mag-label { display: inline-block; pointer-events: none; }
-/* GSAP writes this button's transform every frame; a CSS transition on transform would lag behind it. */
-#ams .is-magnetic { transition: background-color 200ms ease, color 200ms ease; }
+/* GSAP writes these transforms every frame; a CSS transition on transform would lag behind it. */
+html.motion-on #ams .btn { transition: background-color 200ms ease, color 200ms ease; }
+
+/* ---------- HeroScene: drifting halos ---------- */
+.h-halo { position: absolute; border-radius: 50%; pointer-events: none; mix-blend-mode: screen; will-change: transform; }
+.h-halo-warm { left: -12%; top: -22%; width: 62vmax; height: 62vmax; background: radial-gradient(closest-side, rgba(255, 214, 168, 0.46), rgba(255, 214, 168, 0.16) 52%, rgba(255, 214, 168, 0)); }
+.h-halo-blue { right: -16%; bottom: -30%; width: 58vmax; height: 58vmax; background: radial-gradient(closest-side, rgba(72, 104, 232, 0.55), rgba(72, 104, 232, 0.18) 54%, rgba(72, 104, 232, 0)); }
+
+/* ---------- Marquee / ScrubText ---------- */
+[data-marquee] { will-change: transform; }
+html.motion-on #ams [data-scrub-text] span { display: inline-block; }   /* a transform needs a box */
+
+/* ---------- ScrollProgress ---------- */
+.scroll-progress {
+  position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 50;
+  background: #1E3A9B; transform: scaleX(0); transform-origin: right center; pointer-events: none;
+}
+
+/* ---------- Bolder card behaviour: hover on desktop, centre-of-screen on touch ---------- */
+@media (hover: hover) and (pointer: fine) {
+  html.motion-on #ams .proj:hover .hov { transform: scale(1.07); }
+}
+/* Touch: cards wait dimmed and light up, scaled, while they sit in the middle of the screen. */
+html.center-mode #ams[data-motion="on"] .proj .clip { opacity: 0.5; transition: clip-path 1100ms var(--ease-in-out), opacity 600ms ease; }
+html.center-mode #ams[data-motion="on"] .proj.is-active .clip { opacity: 1; }
+html.center-mode #ams .proj.is-active .hov { transform: scale(1.07); }
 
 /* ---------- Stand-down rules: when the GSAP layer is on, the CSS versions of the same effects are off ---------- */
 /* Section titles: RevealText replaces the single clip-path wipe. */
 html.motion-on #ams[data-motion="on"] [data-reveal="title"] > [data-reveal-text] {
   clip-path: none; transform: none; transition: none; opacity: 1;
 }
-/* Parallax: ParallaxWrapper replaces the CSS scroll-timeline drift (which only some browsers run). */
-html.motion-on #ams [data-parallax] { animation: none; }
+/* Blocks: Reveal replaces the short CSS rise. GSAP's inline styles do the hiding and the travel. */
+html.motion-on #ams[data-motion="on"] [data-reveal="up"],
+html.motion-on #ams[data-motion="on"] [data-reveal="fade"] { opacity: 1; transform: none; transition: none; }
+/* Image frames keep their CSS wipe, with a stronger zoom-out behind it. */
+html.motion-on #ams[data-motion="on"] [data-reveal="clip"]:not([data-in]) .zoom { transform: scale(1.34); }
+/* Parallax, hero exit and the word-by-word statement: the GSAP scrubbed versions replace the
+   CSS scroll-timeline ones (which only some browsers run). */
+html.motion-on #ams [data-parallax],
+html.motion-on #ams .h-bg,
+html.motion-on #ams .h-shade,
+html.motion-on #ams .h-center,
+html.motion-on #ams [data-scrub-text] span { animation: none; }

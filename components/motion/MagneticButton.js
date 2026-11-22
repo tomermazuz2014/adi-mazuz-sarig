@@ -1,12 +1,12 @@
 /**
  * MagneticButton — the button leans toward the cursor, its label leans a little further,
- * and both settle back when the cursor leaves. Pressing it gives a small squeeze.
+ * and both settle back when the cursor leaves. (The press squeeze comes from PressFeedback.)
  *
  * Usage:   <a class="btn" data-magnetic href="#contact">לתיאום פגישה</a>
  * Options: data-magnetic="0.35"   how far the button follows the cursor (fraction of the offset)
  *
  * Only mounts for a real mouse ((hover: hover) and (pointer: fine)): on touch there is no cursor
- * to follow, and the element keeps its normal CSS press feedback.
+ * to follow.
  *
  * Why quickTo: the pointer fires many events per frame. quickTo reuses one tween per property and
  * retargets it, so the motion stays interruptible and carries its momentum instead of restarting.
@@ -55,23 +55,16 @@ export function MagneticButton(el, options = {}) {
   const onLeave = () => {
     rest = null;
     xTo(0); yTo(0); lxTo(0); lyTo(0);
-    gsap.to(el, { scale: 1, duration: 0.3, ease: 'expo.out', overwrite: 'auto' });
   };
-  const onDown = () => gsap.to(el, { scale: 0.97, duration: 0.16, ease: 'power2.out', overwrite: 'auto' });
-  const onUp = () => gsap.to(el, { scale: 1, duration: 0.3, ease: 'expo.out', overwrite: 'auto' });
 
   el.addEventListener('pointerenter', onEnter);
   el.addEventListener('pointermove', onMove);
   el.addEventListener('pointerleave', onLeave);
-  el.addEventListener('pointerdown', onDown);
-  el.addEventListener('pointerup', onUp);
 
   return () => {
     el.removeEventListener('pointerenter', onEnter);
     el.removeEventListener('pointermove', onMove);
     el.removeEventListener('pointerleave', onLeave);
-    el.removeEventListener('pointerdown', onDown);
-    el.removeEventListener('pointerup', onUp);
     gsap.killTweensOf([el, label]);
     gsap.set([el, label], { clearProps: 'transform' });
     while (label.firstChild) el.insertBefore(label.firstChild, label);

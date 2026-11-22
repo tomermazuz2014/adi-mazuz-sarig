@@ -9,11 +9,11 @@
  *          data-parallax-trigger=".frame"  selector of the ancestor that defines "crossing the screen"
  *                                          (default: the parent element)
  *
- * The motion is scrubbed: its progress is the scroll position itself, so it can never run ahead of
- * or behind the page. With SmoothScroll on, the scroll position is already eased, which is all the
- * smoothing this needs.
+ * The motion is scrubbed (scrub: 1): its progress follows the scroll position with a second of
+ * easing, so it answers the wheel or the finger directly and glides to rest when they stop.
+ * A negative amount travels the other way, for a layer that should move against its background.
  *
- * Give the element spare height (height: 110% with top: -5% for amount 3.5) or its edge will show.
+ * Give a background spare height (height: 124% with top: -12% for amount 10) or its edge will show.
  *
  * @param {HTMLElement} el
  * @returns {() => void} cleanup
@@ -29,7 +29,7 @@ export function ParallaxWrapper(el, options = {}) {
     {
       yPercent: amount,
       ease: 'none',                                   // linear: the easing belongs to the scroll, not to this
-      scrollTrigger: { trigger, start: 'top bottom', end: 'bottom top', scrub: true },
+      scrollTrigger: { trigger, start: 'top bottom', end: 'bottom top', scrub: 1 },   // 1s of catch-up: follows the finger, never snaps
     });
 
   return () => {
