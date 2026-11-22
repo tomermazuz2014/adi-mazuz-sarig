@@ -6,7 +6,8 @@
  *          The element gets the class `is-active`; <html> gets `center-mode` so the stylesheet can dim
  *          the cards that are not in the centre (see motion.css).
  *
- * Does nothing on devices that can hover: there, the cursor does this job.
+ * Does nothing on devices that can hover (the cursor does this job), and skips anything inside a
+ * horizontal track: HorizontalTrack lights its own cards, because it knows where they are sideways.
  *
  * @returns {() => void} cleanup
  */
@@ -14,9 +15,12 @@ export function CenterActive(selector = '[data-center-active]') {
   const { gsap, ScrollTrigger } = window;
   if (!window.matchMedia('(hover: none)').matches) return () => {};
 
+  const els = gsap.utils.toArray(selector).filter((el) => !el.closest('.is-htrack'));
+  if (!els.length) return () => {};
+
   const root = document.documentElement;
   root.classList.add('center-mode');
-  const triggers = gsap.utils.toArray(selector).map((el) => ScrollTrigger.create({
+  const triggers = els.map((el) => ScrollTrigger.create({
     trigger: el,
     start: 'top 62%',          // the band between 38% and 62% of the screen height
     end: 'bottom 38%',
@@ -26,6 +30,6 @@ export function CenterActive(selector = '[data-center-active]') {
   return () => {
     triggers.forEach((t) => t.kill());
     root.classList.remove('center-mode');
-    document.querySelectorAll(selector).forEach((el) => el.classList.remove('is-active'));
+    els.forEach((el) => el.classList.remove('is-active'));
   };
 }

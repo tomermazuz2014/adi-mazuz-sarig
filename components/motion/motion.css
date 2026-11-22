@@ -19,11 +19,6 @@ html.lenis { scroll-behavior: auto !important; }
 /* GSAP writes these transforms every frame; a CSS transition on transform would lag behind it. */
 html.motion-on #ams .btn { transition: background-color 200ms ease, color 200ms ease; }
 
-/* ---------- HeroScene: drifting halos ---------- */
-.h-halo { position: absolute; border-radius: 50%; pointer-events: none; mix-blend-mode: screen; will-change: transform; }
-.h-halo-warm { left: -12%; top: -22%; width: 62vmax; height: 62vmax; background: radial-gradient(closest-side, rgba(255, 214, 168, 0.46), rgba(255, 214, 168, 0.16) 52%, rgba(255, 214, 168, 0)); }
-.h-halo-blue { right: -16%; bottom: -30%; width: 58vmax; height: 58vmax; background: radial-gradient(closest-side, rgba(72, 104, 232, 0.55), rgba(72, 104, 232, 0.18) 54%, rgba(72, 104, 232, 0)); }
-
 /* ---------- Marquee / ScrubText ---------- */
 [data-marquee] { will-change: transform; }
 html.motion-on #ams [data-scrub-text] span { display: inline-block; }   /* a transform needs a box */
@@ -60,3 +55,76 @@ html.motion-on #ams .h-bg,
 html.motion-on #ams .h-shade,
 html.motion-on #ams .h-center,
 html.motion-on #ams [data-scrub-text] span { animation: none; }
+
+/* =====================================================================================
+   Round 3: preloader curtain, aurora canvas, 3D tilt + glare, pinned horizontal track
+   ===================================================================================== */
+
+/* ---------- Preloader ---------- */
+/* Shown only while <html> carries is-loading / is-revealing (set by the inline script in index.html). */
+.preloader { display: none; }
+html.is-loading .preloader, html.is-revealing .preloader { display: block; position: fixed; inset: 0; z-index: 100; pointer-events: none; }
+html.is-loading .preloader { pointer-events: auto; }
+html.is-loading, html.is-loading body { overflow: hidden; }
+.pre-panel { position: absolute; top: 0; bottom: 0; width: 50.2%; background: #0E0C0B; clip-path: inset(0% 0% 0% 0%); will-change: clip-path; }
+.pre-panel-a { left: 0; }
+.pre-panel-b { right: 0; }
+.pre-content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: clamp(18px, 3vh, 34px); color: #EEF0F2; }
+.pre-mark { width: clamp(64px, 9vw, 112px); height: auto; opacity: 0.9; }
+.pre-count { direction: ltr; display: flex; align-items: flex-start; font-family: 'Bodoni Moda', Didot, 'Times New Roman', serif; font-size: clamp(84px, 17vw, 230px); line-height: 0.9; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.pre-pct { font-size: 0.28em; margin-top: 0.3em; margin-left: 0.12em; color: #A9ADB2; }
+.pre-line { width: min(46vw, 420px); height: 1px; background: rgba(238, 240, 242, 0.22); overflow: hidden; }
+.pre-line span { display: block; height: 100%; background: #EEF0F2; transform: scaleX(0); transform-origin: left center; }
+/* The hero's own entrance waits behind the closed curtain and starts when it parts. */
+html.is-loading #ams .hero, html.is-loading #ams .hero * { animation-play-state: paused !important; }
+/* With the curtain doing the big reveal, the hero's pieces arrive quickly after it. */
+html.motion-on #ams .h-wall { animation: none; }
+html.motion-on #ams .h-dim { animation-duration: 900ms; animation-delay: 0ms; }
+html.motion-on #ams .h-logo { animation-delay: 120ms; }
+html.motion-on #ams .h-rise { animation-delay: 380ms !important; }
+/* The aurora replaces both the drifting CSS halos and the mouse-only pointer light. */
+html.motion-on #ams .h-light, html.motion-on #ams .h-spot { display: none; }
+
+/* ---------- AuroraCanvas ---------- */
+.aurora-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
+#ams .has-aurora { position: relative; overflow: hidden; }
+#ams .has-aurora > :not(.aurora-canvas) { position: relative; z-index: 1; }
+
+/* ---------- Tilt3D: the light band ---------- */
+.tilt-surface { position: relative; overflow: hidden; }
+.tilt-glare {
+  position: absolute; top: -20%; bottom: -20%; left: 0; width: 100%; z-index: 3; pointer-events: none; opacity: 0;
+  background: linear-gradient(105deg, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0.42) 47%, rgba(255, 255, 255, 0.62) 50%, rgba(255, 255, 255, 0.42) 53%, rgba(255, 255, 255, 0) 70%);
+  will-change: transform;
+}
+html.motion-on #ams [data-tilt] { will-change: transform; }
+
+/* ---------- HorizontalTrack: layout while the section is pinned ---------- */
+html.motion-on #ams .is-pinned-h {
+  min-height: 100svh; overflow: hidden;
+  padding-top: clamp(40px, 7svh, 88px) !important; padding-bottom: clamp(28px, 5svh, 64px) !important;
+  display: flex; flex-direction: column; justify-content: center;
+}
+html.motion-on #ams .is-pinned-h > div { width: 100%; }
+html.motion-on #ams .is-pinned-h h2 { margin-bottom: clamp(16px, 3.4svh, 44px) !important; }
+html.motion-on #ams .is-htrack {
+  display: flex !important; flex-wrap: nowrap; align-items: center !important;
+  gap: clamp(22px, 5vw, 96px) !important; width: max-content; will-change: transform;
+}
+html.motion-on #ams .is-htrack > * { flex: 0 0 auto; width: min(72vw, 42svh); margin-top: 0 !important; }
+@media (min-width: 900px) {
+  html.motion-on #ams .is-htrack > * { width: min(60vw, 46svh); }
+}
+@media (max-width: 640px) {
+  /* Narrow cards: keep the caption on one line. */
+  html.motion-on #ams .is-htrack h3 { font-size: 19px !important; white-space: nowrap; }
+  html.motion-on #ams .is-htrack .proj > div:last-child { gap: 10px !important; }
+  html.motion-on #ams .is-htrack .proj > div:last-child > span { font-size: 13px !important; white-space: nowrap; }
+}
+/* In the track the cards are revealed by their travel, not by the image wipe. */
+html.motion-on #ams .is-htrack [data-reveal="clip"] .clip { clip-path: none !important; }
+html.motion-on #ams .is-htrack [data-reveal="clip"] .zoom { transform: none !important; }
+.ht-meter { display: flex; align-items: center; gap: 18px; margin-top: clamp(14px, 2.6svh, 32px); color: #A9ADB2; direction: rtl; }
+.ht-count { font-family: 'Bodoni Moda', Didot, 'Times New Roman', serif; font-style: italic; font-size: 16px; font-variant-numeric: tabular-nums; }
+.ht-rail { flex: 1 1 auto; height: 1px; background: #44474C; overflow: hidden; }
+.ht-fill { display: block; height: 100%; background: #F3F5F7; transform: scaleX(0); transform-origin: right center; }

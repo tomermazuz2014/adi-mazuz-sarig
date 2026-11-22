@@ -17,12 +17,16 @@ Plain static site: `index.html`, `assets/site.css`, `assets/site.js` and images.
 | --- | --- | --- |
 | `SmoothScroll.js` | Lenis smooth scrolling, driven by GSAP's ticker and kept in step with ScrollTrigger. | Global. |
 | `HeroScene.js` | Hero: drifting light halos, floating sign, sheen loop, scrubbed exit. | Mounts on `.hero`. |
-| `Marquee.js` | Endless line of type; scroll velocity speeds it up and reverses it. | `data-marquee="34"` (seconds per loop) on a track of two identical halves. |
+| `Marquee.js` | Kinetic type: endless line; scroll velocity speeds it up, reverses it and skews it. | `data-marquee="38"` (seconds per loop) and `data-marquee-dir="1"` or `"-1"` on a track of two identical halves. |
 | `RevealText.js` | Text rises line by line out of a mask. | `data-reveal-text` on a plain-text element. |
 | `Reveal.js` | Blocks travel up into place, staggered. | `data-reveal="up"` or `"fade"`. |
 | `ScrubText.js` | Words light up with the scroll (`scrub: 1`). | `data-scrub-text` on a paragraph with one `<span>` per word. |
 | `ParallaxWrapper.js` | Scroll-scrubbed drift (`scrub: 1`). | `data-parallax="10"` (percent of its height; negative reverses). |
 | `Float.js` | Endless hover — the ambient motion. | `data-float="14"` (px each way). |
+| `Preloader.js` | 0→100% counter, then a clip-path curtain parts onto the hero. | Markup and the `is-loading` switch are in `index.html`. |
+| `AuroraCanvas.js` | WebGL light field that never stops moving and bends toward cursor or finger. | `data-aurora` on a section; the hero mounts its own. |
+| `Tilt3D.js` | 3D tilt with a light band: follows the cursor on desktop, the scroll on touch. | `data-tilt`. |
+| `HorizontalTrack.js` | Section pins; its cards travel sideways (`scrub: 1`), cover-flow on touch. | `data-htrack` on the row of cards. |
 | `MagneticButton.js` | Button and label lean toward the cursor (mouse only). | `data-magnetic`. |
 | `CenterActive.js` | Touch replacement for hover: active while in mid-screen. | `data-center-active`. |
 | `PressFeedback.js` | `scale(0.95)` on touch/click, springs back. | Every `<a>`, `<button>` and `data-press`. |

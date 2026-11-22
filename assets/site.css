@@ -32,6 +32,8 @@ a:hover { color: inherit; }
 }
 #ams .btn:active { transform: scale(0.97); }
 
+#ams .kt-mask { background: url("walnut.jpg") center / cover; -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+#ams .kt-outline { color: transparent; -webkit-text-stroke: 1.5px #17181A; }
 #ams .hov { transition: transform 900ms var(--ease-out); }
 #ams .h-tag { text-align: left; }
 @media (max-width: 640px) {
