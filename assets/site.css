@@ -190,3 +190,7 @@ a:hover { color: inherit; }
   #ams[data-motion="on"] [data-reveal="line"] { opacity: 0; }
   #ams[data-motion="on"] [data-reveal="line"][data-in] { opacity: 1; }
 }
+
+/* ---------- Site only (not on the design canvas) ---------- */
+/* The hero fills the window it is opened in, so its foot line is never cut off on a short screen. */
+#ams .hero { min-height: clamp(560px, 100svh, 900px) !important; }

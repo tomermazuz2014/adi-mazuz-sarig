@@ -23,18 +23,18 @@
  * a visitor who asks for reduced motion gets none of this layer, and the page falls back to its
  * plain CSS behaviour. If GSAP or Lenis failed to load, this file does nothing.
  */
-import { SmoothScroll } from './SmoothScroll.js?v=756c27ef';
-import { RevealText } from './RevealText.js?v=756c27ef';
-import { Reveal } from './Reveal.js?v=756c27ef';
-import { ScrubText } from './ScrubText.js?v=756c27ef';
-import { ParallaxWrapper } from './ParallaxWrapper.js?v=756c27ef';
-import { Float } from './Float.js?v=756c27ef';
-import { Marquee } from './Marquee.js?v=756c27ef';
-import { MagneticButton } from './MagneticButton.js?v=756c27ef';
-import { CenterActive } from './CenterActive.js?v=756c27ef';
-import { PressFeedback } from './PressFeedback.js?v=756c27ef';
-import { ScrollProgress } from './ScrollProgress.js?v=756c27ef';
-import { HeroScene } from './HeroScene.js?v=756c27ef';
+import { SmoothScroll } from './SmoothScroll.js?v=dc3a4e70';
+import { RevealText } from './RevealText.js?v=dc3a4e70';
+import { Reveal } from './Reveal.js?v=dc3a4e70';
+import { ScrubText } from './ScrubText.js?v=dc3a4e70';
+import { ParallaxWrapper } from './ParallaxWrapper.js?v=dc3a4e70';
+import { Float } from './Float.js?v=dc3a4e70';
+import { Marquee } from './Marquee.js?v=dc3a4e70';
+import { MagneticButton } from './MagneticButton.js?v=dc3a4e70';
+import { CenterActive } from './CenterActive.js?v=dc3a4e70';
+import { PressFeedback } from './PressFeedback.js?v=dc3a4e70';
+import { ScrollProgress } from './ScrollProgress.js?v=dc3a4e70';
+import { HeroScene } from './HeroScene.js?v=dc3a4e70';
 
 const { gsap, ScrollTrigger, Lenis } = window;
 
