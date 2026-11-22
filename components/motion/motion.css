@@ -1,0 +1,28 @@
+/* Styles for the motion layer in components/motion. Loaded after assets/site.css. */
+
+/* ---------- Lenis (smooth scroll) ---------- */
+html.lenis, html.lenis body { height: auto; }
+/* Lenis eases the scroll itself; the stylesheet's own smooth scrolling would ease it a second time. */
+html.lenis { scroll-behavior: auto !important; }
+.lenis:not(.lenis-autoToggle).lenis-stopped { overflow: clip; }
+.lenis [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-smooth iframe { pointer-events: none; }
+
+/* ---------- RevealText ---------- */
+/* One mask per line. The padding gives descenders (g, y, ק) room inside the mask; the negative
+   margin takes the same space back so line spacing does not change while the text is split. */
+.rt-line { display: block; overflow: hidden; padding-bottom: 0.14em; margin-bottom: -0.14em; }
+.rt-line-in { display: block; will-change: transform; }
+
+/* ---------- MagneticButton ---------- */
+.mag-label { display: inline-block; pointer-events: none; }
+/* GSAP writes this button's transform every frame; a CSS transition on transform would lag behind it. */
+#ams .is-magnetic { transition: background-color 200ms ease, color 200ms ease; }
+
+/* ---------- Stand-down rules: when the GSAP layer is on, the CSS versions of the same effects are off ---------- */
+/* Section titles: RevealText replaces the single clip-path wipe. */
+html.motion-on #ams[data-motion="on"] [data-reveal="title"] > [data-reveal-text] {
+  clip-path: none; transform: none; transition: none; opacity: 1;
+}
+/* Parallax: ParallaxWrapper replaces the CSS scroll-timeline drift (which only some browsers run). */
+html.motion-on #ams [data-parallax] { animation: none; }
