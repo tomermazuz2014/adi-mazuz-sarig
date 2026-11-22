@@ -27,22 +27,22 @@
  * a visitor who asks for reduced motion gets none of this layer, and the page falls back to its
  * plain CSS behaviour. If GSAP or Lenis failed to load, this file does nothing.
  */
-import { SmoothScroll } from './SmoothScroll.js?v=27fce378';
-import { Preloader } from './Preloader.js?v=27fce378';
-import { RevealText } from './RevealText.js?v=27fce378';
-import { Reveal } from './Reveal.js?v=27fce378';
-import { ScrubText } from './ScrubText.js?v=27fce378';
-import { ParallaxWrapper } from './ParallaxWrapper.js?v=27fce378';
-import { Float } from './Float.js?v=27fce378';
-import { Marquee } from './Marquee.js?v=27fce378';
-import { MagneticButton } from './MagneticButton.js?v=27fce378';
-import { Tilt3D } from './Tilt3D.js?v=27fce378';
-import { HorizontalTrack } from './HorizontalTrack.js?v=27fce378';
-import { AuroraCanvas } from './AuroraCanvas.js?v=27fce378';
-import { CenterActive } from './CenterActive.js?v=27fce378';
-import { PressFeedback } from './PressFeedback.js?v=27fce378';
-import { ScrollProgress } from './ScrollProgress.js?v=27fce378';
-import { HeroScene } from './HeroScene.js?v=27fce378';
+import { SmoothScroll } from './SmoothScroll.js?v=b228d25b';
+import { Preloader } from './Preloader.js?v=b228d25b';
+import { RevealText } from './RevealText.js?v=b228d25b';
+import { Reveal } from './Reveal.js?v=b228d25b';
+import { ScrubText } from './ScrubText.js?v=b228d25b';
+import { ParallaxWrapper } from './ParallaxWrapper.js?v=b228d25b';
+import { Float } from './Float.js?v=b228d25b';
+import { Marquee } from './Marquee.js?v=b228d25b';
+import { MagneticButton } from './MagneticButton.js?v=b228d25b';
+import { Tilt3D } from './Tilt3D.js?v=b228d25b';
+import { HorizontalTrack } from './HorizontalTrack.js?v=b228d25b';
+import { AuroraCanvas } from './AuroraCanvas.js?v=b228d25b';
+import { CenterActive } from './CenterActive.js?v=b228d25b';
+import { PressFeedback } from './PressFeedback.js?v=b228d25b';
+import { ScrollProgress } from './ScrollProgress.js?v=b228d25b';
+import { HeroScene } from './HeroScene.js?v=b228d25b';
 
 const { gsap, ScrollTrigger, Lenis } = window;
 

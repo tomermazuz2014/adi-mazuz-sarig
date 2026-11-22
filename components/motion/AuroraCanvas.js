@@ -85,6 +85,8 @@ void main(){
   if (uOpaque > 0.5) {
     gl_FragColor = vec4(uBase + light, 1.0);
   } else {
+    // Keep the middle of the picture calmer, so whatever sits there (the sign) stays readable.
+    light *= mix(0.3, 1.0, smoothstep(0.10, 0.46, distance(uv, vec2(0.5, 0.52))));
     float a = clamp(max(light.r, max(light.g, light.b)) * 0.45, 0.0, 1.0);
     gl_FragColor = vec4(light, a);          // premultiplied: mostly light, little coverage
   }

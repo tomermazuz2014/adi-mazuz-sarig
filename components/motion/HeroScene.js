@@ -1,4 +1,4 @@
-import { AuroraCanvas } from './AuroraCanvas.js?v=27fce378';
+import { AuroraCanvas } from './AuroraCanvas.js?v=b228d25b';
 
 /**
  * HeroScene — everything that keeps the hero alive, in one place.
