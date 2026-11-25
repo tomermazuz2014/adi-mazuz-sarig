@@ -1,4 +1,4 @@
-// Motion for the page: scroll reveals, the hero's pointer light and logo glint.
+// Motion for the page: scroll reveals, the hero's logo glint.
 // The component below is the same logic the design canvas runs; here it is mounted once on load.
 class DCLogic { constructor() { this.props = {}; this.state = {}; } }
 
@@ -27,28 +27,10 @@ class Component extends DCLogic {
       playFilm();
     }
 
-    // Pointer light: a pool of light follows the cursor across the wall. Decorative, so it eases toward the
-    // pointer instead of snapping to it, runs only while it has somewhere to go, and only for a real mouse.
+    // When the pointer reaches the sign, the steel catches the light once (never more than every 2.5s).
     var hero = root.querySelector('.hero');
-    var light = root.querySelector('.h-light');
     var fine = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-    if (hero && light && fine && !calm) {
-      var tx = 0, ty = 0, cx = 0, cy = 0, raf = 0, seen = false;
-      var step = function () {
-        cx += (tx - cx) * 0.11; cy += (ty - cy) * 0.11;
-        light.style.transform = 'translate3d(' + cx.toFixed(1) + 'px,' + cy.toFixed(1) + 'px,0)';
-        raf = (Math.abs(tx - cx) + Math.abs(ty - cy) > 0.6) ? requestAnimationFrame(step) : 0;
-      };
-      hero.addEventListener('pointermove', function (e) {
-        if (e.pointerType && e.pointerType !== 'mouse') return;
-        var r = hero.getBoundingClientRect();
-        tx = e.clientX - r.left; ty = e.clientY - r.top;
-        if (!seen) { seen = true; cx = tx; cy = ty; }
-        light.setAttribute('data-on', '');
-        if (!raf) raf = requestAnimationFrame(step);
-      });
-      hero.addEventListener('pointerleave', function () { light.removeAttribute('data-on'); });
-      // When the pointer reaches the sign, the steel catches the light once (never more than every 2.5s).
+    if (hero && fine && !calm) {
       var sign = root.querySelector('.h-logo');
       var bar = root.querySelector('.h-sheen-bar');
       var lastGlint = 0;
@@ -61,7 +43,6 @@ class Component extends DCLogic {
             { duration: 1300, easing: 'cubic-bezier(0.77, 0, 0.175, 1)' });
         });
       }
-      this._stopLight = function () { if (raf) cancelAnimationFrame(raf); };
     }
 
     if (!('IntersectionObserver' in window)) return;   // content stays visible, nothing is armed
@@ -96,7 +77,6 @@ class Component extends DCLogic {
   componentWillUnmount() {
     if (this._io) this._io.disconnect();
     if (this._filmIo) this._filmIo.disconnect();
-    if (this._stopLight) this._stopLight();
     if (this._t) clearTimeout(this._t);
   }
 }

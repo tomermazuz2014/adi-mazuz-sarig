@@ -28,23 +28,23 @@
  * a visitor who asks for reduced motion gets none of this layer, and the page falls back to its
  * plain CSS behaviour. If GSAP or Lenis failed to load, this file does nothing.
  */
-import { SmoothScroll } from './SmoothScroll.js?v=56d4fe87';
-import { Preloader } from './Preloader.js?v=56d4fe87';
-import { RevealText } from './RevealText.js?v=56d4fe87';
-import { Reveal } from './Reveal.js?v=56d4fe87';
-import { ScrubText } from './ScrubText.js?v=56d4fe87';
-import { ParallaxWrapper } from './ParallaxWrapper.js?v=56d4fe87';
-import { Float } from './Float.js?v=56d4fe87';
-import { Marquee } from './Marquee.js?v=56d4fe87';
-import { MagneticButton } from './MagneticButton.js?v=56d4fe87';
-import { Tilt3D } from './Tilt3D.js?v=56d4fe87';
-import { HorizontalTrack } from './HorizontalTrack.js?v=56d4fe87';
-import { AuroraCanvas } from './AuroraCanvas.js?v=56d4fe87';
-import { CenterActive } from './CenterActive.js?v=56d4fe87';
-import { PressFeedback } from './PressFeedback.js?v=56d4fe87';
-import { ScrollProgress } from './ScrollProgress.js?v=56d4fe87';
-import { HeroScene } from './HeroScene.js?v=56d4fe87';
-import { PortraitScene } from './PortraitScene.js?v=56d4fe87';
+import { SmoothScroll } from './SmoothScroll.js?v=921c83c2';
+import { Preloader } from './Preloader.js?v=921c83c2';
+import { RevealText } from './RevealText.js?v=921c83c2';
+import { Reveal } from './Reveal.js?v=921c83c2';
+import { ScrubText } from './ScrubText.js?v=921c83c2';
+import { ParallaxWrapper } from './ParallaxWrapper.js?v=921c83c2';
+import { Float } from './Float.js?v=921c83c2';
+import { Marquee } from './Marquee.js?v=921c83c2';
+import { MagneticButton } from './MagneticButton.js?v=921c83c2';
+import { Tilt3D } from './Tilt3D.js?v=921c83c2';
+import { HorizontalTrack } from './HorizontalTrack.js?v=921c83c2';
+import { AuroraCanvas } from './AuroraCanvas.js?v=921c83c2';
+import { CenterActive } from './CenterActive.js?v=921c83c2';
+import { PressFeedback } from './PressFeedback.js?v=921c83c2';
+import { ScrollProgress } from './ScrollProgress.js?v=921c83c2';
+import { HeroScene } from './HeroScene.js?v=921c83c2';
+import { PortraitScene } from './PortraitScene.js?v=921c83c2';
 
 const { gsap, ScrollTrigger, Lenis } = window;
 

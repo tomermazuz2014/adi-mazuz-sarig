@@ -25,7 +25,7 @@
  * @param {HTMLElement} el   the figure
  * @returns {() => void} cleanup
  */
-import { AlphaVideo } from './AlphaVideo.js?v=56d4fe87';
+import { AlphaVideo } from './AlphaVideo.js?v=921c83c2';
 
 export function PortraitScene(el) {
   const { gsap, ScrollTrigger } = window;

@@ -1,5 +1,3 @@
-import { AuroraCanvas } from './AuroraCanvas.js?v=56d4fe87';
-
 /**
  * HeroScene — everything that keeps the hero alive, in one place.
  *
@@ -7,8 +5,6 @@ import { AuroraCanvas } from './AuroraCanvas.js?v=56d4fe87';
  *   · the room zooms out from 1.5× to rest
  *
  *  Ambient (runs by itself, paused while the hero is off screen)
- *   · a live aurora of warm and royal-blue light over the wall, drawn on the GPU, that bends toward
- *     the cursor or the finger (AuroraCanvas)
  *   · the steel sign floats a few pixels up and down
  *   · every few seconds a band of light crosses the steel
  *
@@ -25,15 +21,12 @@ export function HeroScene(hero) {
   const { gsap, ScrollTrigger } = window;
   const q = (sel) => hero.querySelector(sel);
   const bg = q('.h-bg'), wall = q('.h-wall'), shade = q('.h-shade'), center = q('.h-center');
-  const logo = q('.h-logo'), bar = q('.h-sheen-bar'), foot = q('.h-foot'), light = q('.h-light');
+  const logo = q('.h-logo'), bar = q('.h-sheen-bar'), foot = q('.h-foot');
   if (!bg || !center) return { play() {}, destroy() {} };
 
   const ambient = [];
   const timers = [];
   let played = false;
-
-  // ---- Live light over the wall. Listens on the whole hero so nav and logo do not block it.
-  const stopAurora = AuroraCanvas(bg, { mode: 'glow', before: light ? light.nextSibling : null, listenOn: hero });
 
   // The room starts zoomed in and waits there for the curtain.
   if (wall) gsap.set(wall, { scale: 1.5 });
@@ -79,7 +72,6 @@ export function HeroScene(hero) {
       if (exit.scrollTrigger) exit.scrollTrigger.kill();
       exit.kill();
       ambient.forEach((t) => t.kill());
-      stopAurora();
       if (logo) logo.style.animation = '';
       if (bar) bar.style.animation = '';
       gsap.killTweensOf(wall);
