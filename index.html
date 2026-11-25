@@ -37,13 +37,13 @@
 #studio .ab-stick::after{content:"";position:absolute;inset:-20%;pointer-events:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.35  0 0 0 0 0.28  0 0 0 0 0.2  0 0 0 .07 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");opacity:.6}
 #studio .ab-name{position:absolute;left:0;right:0;top:9%;margin:0;text-align:center;font-family:'Frank Ruhl Libre',Georgia,serif;font-weight:700;font-size:clamp(180px,36vw,620px);line-height:.9;letter-spacing:-.02em;color:#F4EDE2;z-index:1;will-change:transform,opacity;user-select:none}
 #studio .ab-hi{position:absolute;left:62%;top:9%;margin:0;z-index:3;font-family:'Gveret Levin','Frank Ruhl Libre',cursive;font-size:clamp(34px,3.6vw,58px);color:#3A2F26;line-height:1;transform:rotate(-4deg);will-change:transform,opacity}
-#studio .ab-photo-wrap{position:absolute;left:50%;bottom:0;height:90svh;transform:translate3d(-50%,0,0);z-index:2;will-change:transform}
-#studio .ab-photo{display:block;height:100%;width:auto;max-width:none;opacity:0;transition:opacity 1.6s cubic-bezier(.2,.7,.2,1);-webkit-mask-image:linear-gradient(to bottom,#000 88%,transparent 100%);mask-image:linear-gradient(to bottom,#000 88%,transparent 100%)}
+#studio .ab-photo-wrap{position:absolute;left:50%;bottom:0;margin:0;height:92svh;transform:translate3d(-50%,0,0);z-index:2;will-change:transform}
+#studio .ab-photo{display:block;height:100%;width:auto;max-width:none;margin:0;opacity:0;transition:opacity 1.6s cubic-bezier(.2,.7,.2,1)}
 #studio.ab.is-in .ab-photo{opacity:1}
 #studio .ab-copy{position:absolute;top:50%;translate:0 -50%;inset-inline-start:clamp(24px,6vw,104px);width:min(440px,34vw);z-index:4;color:#2F2A25;text-align:right}
-#studio .ab-kick{margin:0;font-size:14px;letter-spacing:.14em;color:#6B5B4B}
+#studio .ab-kick{margin:0;font-size:14px;letter-spacing:.14em;color:#4E4034}
 #studio .ab-h{margin:14px 0 0;font-family:'Frank Ruhl Libre',Georgia,serif;font-weight:600;font-size:clamp(40px,4.2vw,64px);line-height:1.02;color:#2F2A25}
-#studio .ab-sub{margin:12px 0 28px;font-size:17px;letter-spacing:.02em;color:#6B5B4B}
+#studio .ab-sub{margin:12px 0 28px;font-size:17px;letter-spacing:.02em;color:#4E4034}
 #studio .ab-body{margin:0 0 20px;font-size:17px;line-height:1.85;color:#2F2A25}
 #studio .ab-m{display:block;overflow:hidden;padding-bottom:.08em;margin-bottom:-.08em}
 #studio .ab-m>span{display:inline-block;will-change:transform}
@@ -51,7 +51,7 @@
   #studio .ab-track{height:240svh}
   #studio .ab-name{top:4%;font-size:clamp(150px,44vw,240px)}
   #studio .ab-hi{left:auto;right:8%;top:2%;font-size:38px}
-  #studio .ab-photo-wrap{height:56svh;left:50%}
+  #studio .ab-photo-wrap{height:66svh;left:50%}
   #studio .ab-copy{top:17svh;bottom:auto;translate:none;inset-inline:24px;width:auto;max-width:none}
   #studio .ab-h{font-size:40px}
   #studio .ab-body{font-size:15.5px;line-height:1.75;margin-bottom:0}
@@ -60,7 +60,7 @@
 }
 @media (prefers-reduced-motion:reduce){
   #studio .ab-track{height:auto}
-  #studio .ab-stick{position:relative;height:auto;padding:120px 20px 90px}
+  #studio .ab-stick{position:relative;height:auto;padding:120px 20px 90px;overflow:hidden}
   #studio .ab-name,#studio .ab-hi{position:relative;left:auto;right:auto;top:auto;transform:none;display:block;text-align:center;margin:0 auto}
   #studio .ab-hi{text-align:center;margin-bottom:10px}
   #studio .ab-photo-wrap{position:relative;left:auto;transform:none;height:70svh;margin:40px auto 0;display:flex;justify-content:center}
@@ -220,7 +220,7 @@
       <h2 class="ab-name" aria-hidden="true">עדי</h2>
       <p class="ab-hi" aria-hidden="true">היי, אני</p>
       <div class="ab-photo-wrap">
-        <img class="ab-photo" src="assets/adi-cut.webp" alt="עדי מזוז שריג" width="1049" height="1124" decoding="async">
+        <img class="ab-photo" src="assets/adi-hero-cut.webp" alt="עדי מזוז שריג" width="1536" height="1024" decoding="async">
       </div>
       <div class="ab-copy">
         <p class="ab-kick"><span class="ab-m"><span>נעים להכיר</span></span></p>
@@ -571,7 +571,7 @@ window.addEventListener('load',function(){
       .to(lines,{yPercent:-112,duration:.1,stagger:.02},0)
       .fromTo(lines,{yPercent:112},{yPercent:0,duration:.25,stagger:.03},.45);
   } else {
-    tl.fromTo(wrap,{xPercent:-50,scale:1,transformOrigin:'50% 100%'},{xPercent:-88,scale:.9,duration:.4},.15)
+    tl.fromTo(wrap,{xPercent:-50,scale:1,transformOrigin:'50% 100%'},{xPercent:-70,scale:.94,duration:.4},.15)
       .fromTo(name,{xPercent:0,opacity:1},{xPercent:-6,opacity:0,duration:.4},.15)
       .fromTo(hi,{opacity:1},{opacity:0,duration:.2},.15)
       .fromTo(lines,{yPercent:112},{yPercent:0,duration:.2,stagger:.03},.35);
