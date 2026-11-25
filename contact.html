@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>צרו קשר | Adi Mazuz Sarig — Interior Design</title>
+<meta name="description" content="צרו קשר עם עדי מזוז שריג, עיצוב פנים ותכנון.">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" href="assets/mono-walnut.png">
+<style>
+@font-face{font-family:'Ploni';src:url(assets/ploni-regular.otf) format('opentype');font-weight:400;font-display:swap}
+@font-face{font-family:'Ploni';src:url(assets/ploni-medium.otf) format('opentype');font-weight:500;font-display:swap}
+@font-face{font-family:'Ploni';src:url(assets/ploni-light.otf) format('opentype');font-weight:300;font-display:swap}
+*{box-sizing:border-box}
+body{margin:0;background:#F3F5F7;color:#17181A;font-family:'Ploni','Arial Hebrew',Arial,sans-serif;font-weight:300;-webkit-font-smoothing:antialiased}
+.top{display:flex;align-items:center;justify-content:space-between;padding:22px clamp(20px,5vw,64px)}
+.top img{width:96px;height:auto;display:block}
+.top a.back{font-size:13px;letter-spacing:.14em;text-decoration:none;color:#17181A;border-bottom:1px solid #17181A;padding-bottom:3px}
+main{max-width:720px;margin:0 auto;padding:clamp(40px,8vw,96px) clamp(20px,5vw,40px) 96px}
+.eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#1E3A9B;margin:0 0 18px}
+h1{font-weight:500;font-size:clamp(40px,6vw,72px);line-height:1;letter-spacing:-0.035em;margin:0 0 20px}
+.lead{font-size:17px;line-height:1.7;color:#4A4F55;margin:0 0 48px;max-width:56ch}
+form{display:grid;grid-template-columns:1fr 1fr;gap:28px 28px}
+.f{display:flex;flex-direction:column;gap:8px}
+.f.full{grid-column:1/-1}
+label{font-size:13px;letter-spacing:.06em;color:#4A4F55}
+input,select,textarea{font:inherit;font-size:16px;padding:12px 0;border:0;border-bottom:1px solid #B9BEC5;background:transparent;color:#17181A;border-radius:0;outline:none}
+input:focus,select:focus,textarea:focus{border-bottom-color:#1E3A9B}
+textarea{min-height:120px;resize:vertical}
+.submit{margin-top:12px;grid-column:1/-1;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+button{font:inherit;font-size:15px;letter-spacing:.04em;background:#1E3A9B;color:#fff;border:0;padding:16px 36px;cursor:pointer;border-radius:0}
+button:disabled{background:#8D98B3;cursor:not-allowed}
+.note{font-size:13px;color:#6B7079;margin:0}
+@media (max-width:640px){form{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="top">
+  <a href="index.html" aria-label="דף הבית"><img src="assets/logo-steel.png" alt="Adi Mazuz Sarig"></a>
+  <a class="back" href="index.html">חזרה לדף הבית</a>
+</header>
+<main>
+  <p class="eyebrow">צרו קשר</p>
+  <h1>בואו נדבר על הבית שלכם.</h1>
+  <p class="lead">ספרו לי בכמה מילים על הנכס ועל מה שאתם מחפשים, ואחזור אליכם בהקדם לשיחת היכרות.</p>
+  <form id="contact-form" action="https://formspree.io/f/REPLACE_WITH_FORM_ID" method="POST">
+    <div class="f"><label for="name">שם מלא</label><input id="name" name="name" autocomplete="name" required></div>
+    <div class="f"><label for="phone">טלפון</label><input id="phone" name="phone" type="tel" autocomplete="tel" required></div>
+    <div class="f"><label for="email">אימייל</label><input id="email" name="email" type="email" autocomplete="email"></div>
+    <div class="f"><label for="type">סוג הנכס</label>
+      <select id="type" name="type"><option>דירה</option><option>בית פרטי</option><option>משרד</option><option>אחר</option></select></div>
+    <div class="f full"><label for="msg">על הפרויקט</label><textarea id="msg" name="message" placeholder="מה הנכס, באיזה שלב אתם, ומה חשוב לכם"></textarea></div>
+    <div class="submit">
+      <button type="submit" disabled>שליחה</button>
+      <p class="note">הטופס יופעל ברגע שיחובר לשירות קבלת הטפסים.</p>
+    </div>
+  </form>
+</main>
+</body>
+</html>
